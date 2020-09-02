@@ -31,13 +31,6 @@ pipeline {
          }
       }
 
-      stage('Publish Artifacts') {
-         steps {
-            sh "echo 'Pushing to Nexus'"
-            sh "sleep 30"
-         }
-      }
-
       stage('Docker Build') {
          steps {
             sh "echo 'Running Docker build ..' "
@@ -46,7 +39,7 @@ pipeline {
               DOCKER_RELEASE_TAG = "MYAPP-${SHORT_HASH}"
             }
             echo "DOCKER_RELEASE_TAG:  $DOCKER_RELEASE_TAG"
-            //sh "cd $WORKSPACE/webgoat-server && /usr/bin/docker build -t kmasani/webgoat:${DOCKER_RELEASE_TAG} ."
+            sh "cd $WORKSPACE/webwolf && docker build -t kmasani/webgoat:${DOCKER_RELEASE_TAG} ."
          }
       }
 
@@ -59,6 +52,13 @@ pipeline {
 
             //sh "echo 'Pushing Docker .. ' "
             //sh "docker push kmasani/myapp:${DOCKER_RELEASE_TAG}"
+         }
+      }
+
+      stage('Publish Artifacts') {
+         steps {
+            sh "echo 'Pushing to Nexus'"
+            sh "sleep 30"
          }
       }
 
