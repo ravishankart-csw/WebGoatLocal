@@ -30,7 +30,7 @@ pipeline {
          steps {
             parallel(
                SonarQube: {
-                  withCredentials([ usernamePassword(credentialsId: SonarCred, \
+                  withCredentials([ usernamePassword(credentialsId: 'SonarCred', \
                                     usernameVariable: 'SONARUSER', \
                                     passwordVariable: 'SONARKEY') ]){
                       sh "mvn sonar:sonar -Dsonar.host.url=http://localhost:9000 -Dsonar.login=${SONARKEY}"
