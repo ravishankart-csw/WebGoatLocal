@@ -30,8 +30,12 @@ pipeline {
          steps {
             parallel(
                SonarQube: {
-                  sh "mvn sonar:sonar -Dsonar.host.url=http://localhost:9000 -Dsonar.login=3efe63b36269b032801965f520a4ff10cca0c15c"
-                  echo "Getting the analysis results .. "
+                  withCredentials([ usernamePassword(credentialsId: SonarCred, \
+                                    usernameVariable: 'SONARUSER', \
+                                    passwordVariable: 'SONARKEY') ]){
+                      sh "mvn sonar:sonar -Dsonar.host.url=http://localhost:9000 -Dsonar.login=${SONARKEY}"
+                      echo "Getting the analysis results .. "
+                  }
                },
                GithubReport: {
                   echo "Getting Github report"
