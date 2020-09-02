@@ -48,6 +48,12 @@ pipeline {
          }
       }
 
+      stage('Checkpoint') {
+          steps {
+              echo "Analyze if all scan-results are within threshold"
+          }
+      }
+
       stage('Publish Artifacts') {
          steps {
             sh "echo 'Pushing to Nexus'"
