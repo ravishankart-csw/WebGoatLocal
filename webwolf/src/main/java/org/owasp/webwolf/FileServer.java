@@ -25,6 +25,9 @@ package org.owasp.webwolf;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
+import java.nio.file.Path;
+import java.nio.file.NoSuchFileException;
+import java.nio.file.DirectoryNotEmptyException;
 import org.apache.commons.io.FileUtils;
 import org.owasp.webwolf.user.WebGoatUser;
 import org.springframework.beans.factory.annotation.Value;
@@ -88,6 +91,11 @@ public class FileServer {
         private final String name;
         private final String size;
         private final String link;
+    }
+
+    public void cleanup(Path path) throws NoSuchFileException, DirectoryNotEmptyException, IOException {
+
+        Files.delete(path);
     }
 
     @GetMapping(value = "/WebWolf/files")
