@@ -69,7 +69,7 @@ pipeline {
          }
          steps {
              echo "Running Container scan .. "
-             sh "cd $WORKSPACE && /opt/tools/anchore_cli/inline_scan-v0.6.0 scan -r kmasani/webwolf::${DOCKER_RELEASE_TAG}"
+             sh "cd $WORKSPACE && /opt/tools/anchore_cli/inline_scan-v0.6.0 scan -r kmasani/webwolf:${DOCKER_RELEASE_TAG}"
          }
       }
 
