@@ -20,11 +20,6 @@ public class Controller {
         return "Hello";
     }
 
-    @RequestMapping(value = "/talk")
-    public String talk(String talkee) {
-        return "Hi";
-    }
-
     @RequestMapping(value = "/about", method = RequestMethod.POST)
     public String about() {
 
