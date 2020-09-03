@@ -9,7 +9,7 @@ import java.time.LocalTime;
 @RestController
 public class CoreController {
 
-    @RequestMapping(value = "/talk")
+    @RequestMapping(value = "/talk", method = RequestMethod.GET)
     public String talk(String talkee) {
         return "Hi";
     }
