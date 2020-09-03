@@ -74,6 +74,7 @@ pipeline {
       stage('Checkpoint') {
           steps {
               echo "Analyze if all scan-results are within threshold"
+              sh "python3 /opt/tools/custom/checkpoint.py"
           }
       }
 
