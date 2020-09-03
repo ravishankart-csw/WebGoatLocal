@@ -34,14 +34,20 @@ pipeline {
                                     usernameVariable: 'SONARUSER', \
                                     passwordVariable: 'SONARKEY') ]){
                       sh "mvn sonar:sonar -Dsonar.host.url=http://localhost:9000 -Dsonar.login=${SONARKEY}"
-                      echo "Getting the analysis results .. "
+                      echo "TODO: Parse analysis results .. "
                   }
                },
                GithubReport: {
-                  echo "Getting Github report"
+                  echo "Getting Github dependabot alerts .."
+                  withCredentials([ usernamePassword(credentialsId: 'Github', \
+                                    usernameVariable: 'GITUSER', \
+                                    passwordVariable: 'GITKEY') ]){
+                      sh "python3 /opt/tools/github_cli/report_org_vuln.py --key ${GITKEY}"
+                  }
                },
                SCAAnalysis: {
                   echo "TODO: Pending to be included."
+                  sh "sleep 10"
                },
                ContainerScan: {
                   echo "Running Container scan .. "
