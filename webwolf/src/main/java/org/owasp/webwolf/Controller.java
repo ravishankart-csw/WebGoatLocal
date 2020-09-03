@@ -15,7 +15,7 @@ public class Controller {
         return "This is Home page";
     }
 
-    @RequestMapping(value = "/greet" method = RequestMethod.GET)
+    @RequestMapping(value = "/greet", method = RequestMethod.GET)
     public String greet(String greetee) {
         return "Hello";
     }
