@@ -60,12 +60,10 @@ pipeline {
 
       stage('Scans: Container') {
          when {
-           not {
              anyOf {
-                branch 'master';
-                branch 'develop' 
+                 branch 'master';
+                 branch 'develop' 
              }
-           }
          }
          steps {
              echo "Running Container scan .. "
