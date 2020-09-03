@@ -51,7 +51,7 @@ pipeline {
                },
                ContainerScan: {
                   echo "Running Container scan .. "
-                  sh "cd $WORKSPACE && /opt/tools/anchore_cli/inline_scan-v0.6.0 scan -r kmasani/webwolf:${DOCKER_RELEASE_TAG}"
+                  sh "cd $WORKSPACE && /opt/tools/anchore_cli/inline_scan-v0.6.0 -r -t 500  kmasani/webwolf:MYAPP-demo"
                   // sh "/usr/bin/python /opt/devops/scripts/parse_anchore_analysis.py --outfile $WORKSPACE/anchore-reports/webgoat-local_latest-vuln.json"
                }
             )
