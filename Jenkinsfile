@@ -42,7 +42,8 @@ pipeline {
                   withCredentials([ usernamePassword(credentialsId: 'Github', \
                                     usernameVariable: 'GITUSER', \
                                     passwordVariable: 'GITKEY') ]){
-                      sh "python3 /opt/tools/github_cli/report_org_vuln.py --key ${GITKEY}"
+                      sh "python3 /opt/tools/github_cli/report_org_vuln.py --key ${GITKEY} --type csv --output github_vuln_data.csv"
+                      sh "ls -trl $WORKSPACE"
                   }
                },
                SCAAnalysis: {

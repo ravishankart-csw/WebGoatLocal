@@ -9,7 +9,7 @@ import java.time.LocalTime;
 @RestController
 public class JobController {
 
-    @RequestMapping(value = "/jobs")
+    @RequestMapping(value = "/jobs", method = RequestMethod.GET)
     public String job(String jobname) {
         return "List of Jobs";
     }
