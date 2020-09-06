@@ -63,8 +63,10 @@ pipeline {
          }
          steps {
              echo "Running Container scan .. "
-             sh "sleep 60"
              sh "cd $WORKSPACE && /opt/tools/anchore_cli/inline_scan-v0.6.0 scan -r kmasani/webwolf:${DOCKER_RELEASE_TAG}"
+             sh "python3 /opt/tools/custom/generate_anchore_csv.py  --file webwolf_MYAPP-${DOCKER_RELEASE_TAG}-vuln.json  --outfile anchore-vuln-data.csv"
+             sh "ls -trl"
+             sh "cp $WORKSPACE/anchore-vuln-data.csv /Users/kiran/Downloads/files_to_process/"
          }
       }
 
