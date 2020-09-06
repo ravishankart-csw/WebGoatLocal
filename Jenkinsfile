@@ -6,7 +6,7 @@ pipeline {
    }
 
    stages {
-      stage('BUILD') {
+      stage('Build') {
          steps {
             git 'https://github.com/kmasani81/WebGoatLocal.git'
 
@@ -70,7 +70,7 @@ pipeline {
          }
       }
 
-      stage('Vulnerabilities Upload') {
+      stage('RiskSense Upload') {
           steps {
               echo "Uploading scan-analysis results to RiskSense Platform"
               sh "ls -trl /Users/kiran/Downloads/files_to_process/"
