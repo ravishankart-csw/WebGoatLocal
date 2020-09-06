@@ -34,6 +34,9 @@ pipeline {
                                     usernameVariable: 'SONARUSER', \
                                     passwordVariable: 'SONARKEY') ]){
                       sh "mvn sonar:sonar -Dsonar.host.url=http://localhost:9000 -Dsonar.login=${SONARKEY}"
+                      sh "python3 /opt/tools/custom/generate_sonar_csv.py --key ${SONARKEY} --outfile sonar_vuln.csv"
+                      sh "ls -trl $WORKSPACE"
+                      sh "cp $WORKSPACE/sonar_vuln.csv /Users/kiran/Downloads/files_to_process/"
                   }
                },
                GithubReport: {
