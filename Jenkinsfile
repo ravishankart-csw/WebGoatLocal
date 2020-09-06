@@ -49,11 +49,6 @@ pipeline {
                SCAAnalysis: {
                   echo "TODO: Pending to be included."
                   sh "sleep 10"
-               },
-               ContainerScan: {
-                  echo "Running Container scan .. "
-                  // sh "cd $WORKSPACE && /opt/tools/anchore_cli/inline_scan-v0.6.0 -r -t 500  kmasani/webwolf:MYAPP-demo"
-                  // sh "/usr/bin/python /opt/devops/scripts/parse_anchore_analysis.py --outfile $WORKSPACE/anchore-reports/webgoat-local_latest-vuln.json"
                }
             )
          }
