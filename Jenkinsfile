@@ -44,8 +44,6 @@ pipeline {
                       sh "python3 /opt/tools/github_cli/report_org_vuln.py --key ${GITKEY} --type csv --output github_vuln_data.csv"
                       sh "ls -trl $WORKSPACE"
                       sh "cp $WORKSPACE/github_vuln_data.csv /Users/kiran/Downloads/files_to_process/"
-                      sh "ls -trl /Users/kiran/Downloads/files_to_process/"
-                      sh "python3 /opt/tools/upload_to_platform_v1.0/upload_to_platform.py"
                   }
                },
                SCAAnalysis: {
@@ -68,6 +66,14 @@ pipeline {
              sh "sleep 60"
              sh "cd $WORKSPACE && /opt/tools/anchore_cli/inline_scan-v0.6.0 scan -r kmasani/webwolf:${DOCKER_RELEASE_TAG}"
          }
+      }
+
+      stage('RiskSense Upload') {
+          steps {
+              echo "Uploading scan-analysis results to RiskSense Platform"
+              sh "ls -trl /Users/kiran/Downloads/files_to_process/"
+              sh "python3 /opt/tools/upload_to_platform_v1.0/upload_to_platform.py"
+          }
       }
 
       stage('Checkpoint') {
