@@ -34,7 +34,6 @@ pipeline {
                                     usernameVariable: 'SONARUSER', \
                                     passwordVariable: 'SONARKEY') ]){
                       sh "mvn sonar:sonar -Dsonar.host.url=http://localhost:9000 -Dsonar.login=${SONARKEY}"
-                      echo "TODO: Parse analysis results .. "
                   }
                },
                GithubReport: {
@@ -44,6 +43,9 @@ pipeline {
                                     passwordVariable: 'GITKEY') ]){
                       sh "python3 /opt/tools/github_cli/report_org_vuln.py --key ${GITKEY} --type csv --output github_vuln_data.csv"
                       sh "ls -trl $WORKSPACE"
+                      sh "cp $WORKSPACE/github_vuln_data.csv /Users/kiran/Downloads/files_to_process/"
+                      sh "ls -trl /Users/kiran/Downloads/files_to_process/"
+                      sh "python3 /opt/tools/upload_to_platform_v1.0/upload_to_platform.py"
                   }
                },
                SCAAnalysis: {
