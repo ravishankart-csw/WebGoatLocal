@@ -20,6 +20,10 @@ jobs:
       uses: actions/setup-java@v1.4.2
       with:
         java-version: 11
+    - name: Initialize CodeQL
+      uses: github/codeql-action/init@v1
+      with:
+        languages: ${{ matrix.language }}
     - name: AutoBuild
       uses: github/codeql-action/autobuild@v1
     - name: Build the Docker image
